@@ -26,3 +26,10 @@ jobs:
 
       - name: Run tag checker script
         run: python script.py
+        
+      - name: Upload output CSV
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-resources-with-tags
+          path: terraform_resources_with_tags.csv
+
