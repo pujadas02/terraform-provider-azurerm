@@ -27,9 +27,16 @@ jobs:
       - name: Run tag checker script
         run: python script.py
         
-      - name: Upload output CSV
-        uses: actions/upload-artifact@v4
-        with:
-          name: terraform-resources-with-tags
-          path: terraform_resources_with_tags.csv
+      # - name: Upload output CSV
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: terraform-resources-with-tags
+      #     path: terraform_resources_with_tags.csv
+      - name: Commit and push CSV file to repo
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add terraform_resources_with_tags.csv
+          git commit -m "Auto-update tag support CSV [skip ci]" || echo "No changes to commit"
+          git push
 
