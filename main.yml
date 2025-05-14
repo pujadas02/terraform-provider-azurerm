@@ -1,0 +1,27 @@
+name: Run Tag Checker Script
+
+on:
+  push:
+    branches:  main    # Or change to your default branch
+  workflow_dispatch:     # Allows manual trigger from GitHub UI
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run tag checker script
+        run: python script.py
